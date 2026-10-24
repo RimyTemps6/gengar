@@ -1,0 +1,48 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Dispositivos (motores, servos, sensores)
+    match /dispositivos/{docId} {
+      allow read: if true;
+      allow create, update: if request.resource.data.keys().hasOnly(
+          ['secao', 'ordem', 'id', 'port', 'desc', 'prog', 'val1', 'v1', 'val2', 'v2'])
+        && request.resource.data.secao is string && request.resource.data.secao.size() <= 80
+        && request.resource.data.ordem is number
+        && request.resource.data.id is string && request.resource.data.id.size() <= 100
+        && request.resource.data.port is string && request.resource.data.port.size() <= 100
+        && request.resource.data.desc is string && request.resource.data.desc.size() <= 300
+        && request.resource.data.prog is string && request.resource.data.prog.size() <= 100
+        && request.resource.data.val1 is string && request.resource.data.val1.size() <= 100
+        && request.resource.data.v1 is string && request.resource.data.v1.size() <= 100
+        && request.resource.data.val2 is string && request.resource.data.val2.size() <= 100
+        && request.resource.data.v2 is string && request.resource.data.v2.size() <= 100;
+      allow delete: if true;
+    }
+
+    // Botões dos controles (c0 = Driver, c1 = Operator)
+    match /controles/{docId} {
+      allow read: if true;
+      allow create, update: if docId in ['c0', 'c1']
+        && request.resource.data.keys().hasOnly(['LB', 'RB', 'LT', 'RT', 'A', 'B', 'X', 'Y'])
+        && request.resource.data.get('LB', '') is string && request.resource.data.get('LB', '').size() <= 100
+        && request.resource.data.get('RB', '') is string && request.resource.data.get('RB', '').size() <= 100
+        && request.resource.data.get('LT', '') is string && request.resource.data.get('LT', '').size() <= 100
+        && request.resource.data.get('RT', '') is string && request.resource.data.get('RT', '').size() <= 100
+        && request.resource.data.get('A', '') is string && request.resource.data.get('A', '').size() <= 100
+        && request.resource.data.get('B', '') is string && request.resource.data.get('B', '').size() <= 100
+        && request.resource.data.get('X', '') is string && request.resource.data.get('X', '').size() <= 100
+        && request.resource.data.get('Y', '') is string && request.resource.data.get('Y', '').size() <= 100;
+      allow delete: if false;
+    }
+
+    // Marca que os dados iniciais já foram criados
+    match /meta/{docId} {
+      allow read: if true;
+      allow create: if docId == 'init' && request.resource.data.keys().hasOnly(['criadoEm']);
+      allow update, delete: if false;
+    }
+
+    // Todo o resto fica bloqueado
+  }
+}

@@ -4,288 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Organizador de Driver FTC - BrainMachine #17728</title>
-    <style>
-        :root {
-            /* Paleta BrainMachine #17728 - Branco, Roxo e Preto */
-            --primary: #8A2BE2; /* Roxo */
-            --primary-dark: #4B0082;
-            --secondary: #000000; /* Preto */
-            --bg: #FFFFFF; /* Fundo Branco */
-            --card-bg: #F5F5F5; /* Branco acinzentado para cards */
-            --text: #1A1A1A; /* Texto quase preto */
-            --text-dim: #666666;
-            --border: #CCCCCC;
-            --accent: #FFFFFF;
-            --highlight: #8A2BE2;
-        }
-
-        body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            margin: 0;
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        h1 {
-            color: var(--primary);
-            margin-bottom: 25px;
-            text-align: center;
-            text-transform: uppercase;
-            font-size: 1.5rem;
-            letter-spacing: 1px;
-            border-bottom: 3px solid var(--secondary);
-            padding-bottom: 10px;
-            width: 100%;
-            max-width: 1100px;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 1100px;
-        }
-
-        /* Seções */
-        .section {
-            background: var(--card-bg);
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            margin-bottom: 25px;
-            padding: 15px;
-            border: 1px solid var(--border);
-        }
-
-        .section-title {
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin-bottom: 15px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid var(--primary);
-            color: var(--primary);
-            display: block;
-        }
-
-        /* Grid Adaptável para Celular */
-        .device-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 15px;
-        }
-
-        .device-card {
-            background: var(--accent);
-            border-radius: 10px;
-            padding: 15px;
-            border: 1px solid var(--border);
-            transition: border-color 0.2s;
-        }
-
-        .device-card:hover {
-            border-color: var(--primary);
-        }
-
-        .device-header {
-            font-weight: bold;
-            margin-bottom: 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 1rem;
-        }
-
-        .port-badge {
-            background: var(--primary);
-            color: white;
-            font-size: 0.7rem;
-            padding: 2px 8px;
-            border-radius: 10px;
-            white-space: nowrap;
-        }
-
-        .input-group {
-            margin-bottom: 12px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .input-group label {
-            font-size: 0.8rem;
-            margin-bottom: 5px;
-            color: var(--text-dim);
-        }
-
-        .input-group input {
-            padding: 10px;
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            font-size: 0.95rem;
-            width: 100%;
-            box-sizing: border-box;
-            background: #FFFFFF;
-            color: #000;
-            -webkit-appearance: none;
-        }
-
-        .input-group input:focus {
-            outline: none;
-            border-color: var(--primary);
-            background: #FFFFFF;
-        }
-
-        .value-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-
-        /* Controles Responsivos */
-        .controllers-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .controller-card {
-            background: var(--secondary);
-            color: white;
-            border-radius: 15px;
-            padding: 15px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-            border-top: 4px solid var(--primary);
-        }
-
-        .controller-card h2 {
-            text-align: center;
-            margin-top: 0;
-            color: #ccc;
-            font-size: 1.1rem;
-            text-transform: uppercase;
-            margin-bottom: 15px;
-        }
-
-        .button-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-            gap: 10px;
-        }
-
-        .button-row {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .ctrl-input-group {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(138, 43, 226, 0.2);
-            padding: 8px;
-            border-radius: 6px;
-            border: 1px solid rgba(138, 43, 226, 0.3);
-        }
-
-        .ctrl-label {
-            font-weight: bold;
-            min-width: 30px;
-            color: #E0B0FF;
-            font-size: 0.85rem;
-        }
-
-        .ctrl-input {
-            background: transparent;
-            border: none;
-            border-bottom: 1px solid #666;
-            color: white;
-            width: 100%;
-            padding: 4px;
-            font-size: 0.85rem;
-            -webkit-appearance: none;
-        }
-
-        .ctrl-input:focus {
-            outline: none;
-            border-bottom-color: var(--primary);
-        }
-
-        .footer {
-            margin: 30px 0;
-            text-align: center;
-            color: var(--text-dim);
-            font-size: 0.8rem;
-        }
-
-        .save-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 15px 25px;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(138, 43, 226, 0.4);
-            z-index: 100;
-            text-transform: uppercase;
-            transition: transform 0.2s;
-        }
-
-        .save-btn:active {
-            transform: scale(0.95);
-        }
-
-        .export-area {
-            display: none;
-            width: 100%;
-            max-width: 800px;
-            margin-top: 20px;
-        }
-
-        textarea {
-            width: 100%;
-            height: 300px;
-            font-family: monospace;
-            padding: 15px;
-            border: 2px solid var(--border);
-            border-radius: 8px;
-            background: #f9f9f9;
-            color: #000;
-            font-size: 0.9rem;
-            box-sizing: border-box;
-        }
-
-        /* Ajustes Mobile */
-        @media (max-width: 600px) {
-            body { padding: 10px; }
-            h1 { font-size: 1.2rem; }
-            .value-row { grid-template-columns: 1fr; }
-            .controllers-container { grid-template-columns: 1fr; }
-            .button-grid { grid-template-columns: 1fr; }
-            .save-btn {
-                width: calc(100% - 40px);
-                left: 20px;
-                right: 20px;
-                text-align: center;
-                bottom: 15px;
-            }
-        }
-    </style>
+    <meta name="theme-color" content="#8A2BE2">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="icons/icon-192.png">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="BrainMachine">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <h1>⚙️ BrainMachine #17728</h1>
 
+    <div class="topbar">
+        <span class="pill" id="status">Conectando…</span>
+        <button class="btn-small" id="installBtn" hidden>📲 Instalar app</button>
+    </div>
+
     <div class="container">
         <!-- Mapeamento de Controles -->
-        <div class="controllers-container">
+        <div class="controllers-container" id="controllers">
             <div class="controller-card" id="ctrl1">
                 <h2>🎮 Controle 0 (Driver)</h2>
                 <div class="button-grid">
@@ -323,178 +62,24 @@
         </div>
 
         <div id="app"></div>
+        <button class="add-section-btn" id="addSectionBtn">➕ Nova seção</button>
     </div>
 
     <div class="export-area" id="exportArea">
         <div class="section-title">📄 Configuração Final</div>
         <textarea id="outputText" readonly></textarea>
-        <button onclick="hideExport()" style="margin-top: 10px; padding: 12px 20px; cursor: pointer; background: var(--secondary); color: white; border: 1px solid var(--border); border-radius: 6px; width: 100%;">Voltar</button>
+        <div class="export-actions">
+            <button class="primary" id="copyBtn">Copiar</button>
+            <button id="backBtn">Voltar</button>
+        </div>
     </div>
 
-    <button class="save-btn" onclick="exportData()">💾 Gerar Configuração</button>
+    <button class="save-btn" id="exportBtn">💾 Gerar Configuração</button>
 
     <div class="footer">
         BrainMachine #17728 &copy; 2026
     </div>
 
-    <script>
-        function loadSavedData() {
-            const savedConfig = localStorage.getItem('ftc_config_data');
-            if (savedConfig) return JSON.parse(savedConfig);
-
-            return {
-                "Servos Expansion": [
-                    { id: "servoAR", port: "4", desc: "Aerofólio", prog: "servoAR", val1: "Para Frente", v1: "0.8", val2: "Nas Consta", v2: "0.6" },
-                    { id: "servoAL", port: "2", desc: "Aerofólio", prog: "servoAL", val1: "Para Frente", v1: "0.8", val2: "Nas Consta", v2: "0.6" },
-                    { id: "turret", port: "5", desc: "Turret", prog: "turret", val1: "N/A", v1: "-", val2: "N/A", v2: "-" },
-                    { id: "turretAjustL", port: "0", desc: "Regula Tamanho Polen/Nectar", prog: "turretAjustL", val1: "Polen", v1: "0.1", val2: "Néctar", v2: "0.3" },
-                    { id: "turretAjustR", port: "1", desc: "Regula Tamanho Polen/Nectar", prog: "turretAjustR", val1: "Polen", v1: "0.12", val2: "Néctar", v2: "0.5" }
-                ],
-                "Servos Control Hub": [
-                    { id: "servoIntk", port: "3", desc: "Porteira Intake Cheio", prog: "servoIntk", val1: "Fechado", v1: "0.65", val2: "Aberto", v2: "1.0" },
-                    { id: "servoR", port: "4", desc: "Libera Polen/Nectar Shooter", prog: "servoR", val1: "Fechado", v1: "0.47", val2: "Aberto", v2: "0.2" }
-                ],
-                "Motores Expansion": [
-                    { id: "indexer", port: "0", desc: "Empurra Polen/Nectar", prog: "indexer", val1: "Coletando", v1: "-0.6", val2: "Expelindo", v2: "0.6" },
-                    { id: "intake", port: "2", desc: "Coleta Polen/Nectar", prog: "intake", val1: "Coletando", v1: "-0.6", val2: "Expelindo", v2: "0.6" },
-                    { id: "roda1", port: "1", desc: "Rodas Direita", prog: "roda1", val1: "Modo", v1: "Por Analogico", val2: "N/A", v2: "-" },
-                    { id: "roda3", port: "3", desc: "Rodas Direita", prog: "roda3", val1: "Modo", v1: "Por Analogico", val2: "N/A", v2: "-" }
-                ],
-                "Motores Control Hub": [
-                    { id: "roda0", port: "0", desc: "Rodas Esquerda", prog: "roda0", val1: "Modo", v1: "Por Analogico", val2: "N/A", v2: "-" },
-                    { id: "roda2", port: "2", desc: "Rodas Esquerda", prog: "roda2", val1: "Modo", v1: "Por Analogico", val2: "N/A", v2: "-" },
-                    { id: "shooterL", port: "1", desc: "Motores do Shooter", prog: "shooterL", val1: "Modo", v1: "Hipotenusa", val2: "N/A", v2: "-" },
-                    { id: "shooterR", port: "3", desc: "Motores do Shooter", prog: "shooterR", val1: "Modo", v1: "Hipotenusa", val2: "N/A", v2: "-" }
-                ],
-                "I2C Sensor De Cor Expansion": [
-                    { id: "distIntake2", port: "0 (Bus 1)", desc: "Depois do distIntake3", prog: "distIntake2", val1: "Distancia Carregado", v1: "2", val2: "N/A", v2: "-" },
-                    { id: "distIntake3", port: "0 (Bus 2)", desc: "Depois do distIntake4", prog: "distIntake3", val1: "Distancia Carregado", v1: "3.5", val2: "N/A", v2: "-" },
-                    { id: "distIntake4", port: "0 (Bus 3)", desc: "Mais Longe do Intake", prog: "distIntake4", val1: "Distancia Carregado", v1: "3.5", val2: "N/A", v2: "-" }
-                ],
-                "I2C Sensor De Cor Control Hub": [
-                    { id: "imu", port: "0 (Bus 0)", desc: "Giroscopio Interno", prog: "Sem Nome", val1: "Valor", v1: "Sem Valor", val2: "N/A", v2: "-" },
-                    { id: "pinpoint", port: "0 (Bus 1)", desc: "Informações Gobilda", prog: "pinpoint", val1: "Valor", v1: "Sem Valor", val2: "N/A", v2: "-" },
-                    { id: "distIntake1", port: "0 (Bus 2)", desc: "Mais Próximo do Intake", prog: "distIntake1", val1: "Distancia Carregado", v1: "4.2", val2: "N/A", v2: "-" }
-                ]
-            };
-        }
-
-        let configData = loadSavedData();
-
-        function render() {
-            const app = document.getElementById('app');
-            app.innerHTML = '';
-            for (const [section, devices] of Object.entries(configData)) {
-                const sectionDiv = document.createElement('div');
-                sectionDiv.className = 'section';
-                sectionDiv.innerHTML = `<div class="section-title">${section}</div>`;
-                const grid = document.createElement('div');
-                grid.className = 'device-grid';
-
-                devices.forEach((dev, idx) => {
-                    const card = document.createElement('div');
-                    card.className = 'device-card';
-                    card.innerHTML = `
-                        <div class="device-header">
-                            <span>${dev.id}</span>
-                            <span class="port-badge">Porta ${dev.port}</span>
-                        </div>
-                        <div class="input-group">
-                            <label>Descrição</label>
-                            <input type="text" value="${dev.desc}" onchange="updateData('${section}', ${idx}, 'desc', this.value)">
-                        </div>
-                        <div class="input-group">
-                            <label>Nome na Programação</label>
-                            <input type="text" value="${dev.prog}" onchange="updateData('${section}', ${idx}, 'prog', this.value)">
-                        </div>
-                        <div class="value-row">
-                            <div class="input-group">
-                                <label>${dev.val1 || 'Valor 1'}</label>
-                                <input type="text" value="${dev.v1}" onchange="updateData('${section}', ${idx}, 'v1', this.value)">
-                            </div>
-                            <div class="input-group">
-                                <label>${dev.val2 || 'Valor 2'}</label>
-                                <input type="text" value="${dev.v2}" onchange="updateData('${section}', ${idx}, 'v2', this.value)">
-                            </div>
-                        </div>
-                    `;
-                    grid.appendChild(card);
-                });
-                sectionDiv.appendChild(grid);
-                app.appendChild(sectionDiv);
-            }
-        }
-
-        function updateData(section, idx, field, value) {
-            configData[section][idx][field] = value;
-            saveToLocalStorage();
-        }
-
-        function saveToLocalStorage() {
-            localStorage.setItem('ftc_config_data', JSON.stringify(configData));
-            const ctrlData = {};
-            document.querySelectorAll('.ctrl-input').forEach(input => {
-                const ctrl = input.dataset.ctrl;
-                const btn = input.dataset.btn;
-                if(!ctrlData[ctrl]) ctrlData[ctrl] = {};
-                ctrlData[ctrl][btn] = input.value;
-            });
-            localStorage.setItem('ftc_ctrl_data', JSON.stringify(ctrlData));
-        }
-
-        function loadControllerData() {
-            const saved = localStorage.getItem('ftc_ctrl_data');
-            if (saved) {
-                const data = JSON.parse(saved);
-                document.querySelectorAll('.ctrl-input').forEach(input => {
-                    const ctrl = input.dataset.ctrl;
-                    const btn = input.dataset.btn;
-                    if (data[ctrl] && data[ctrl][btn]) input.value = data[ctrl][btn];
-                });
-            }
-        }
-
-        function exportData() {
-            let text = "Motores Do Robô - BrainMachine #17728\n\n";
-            text += "---------------------------------------------------------------------------------------------------------------------------\n\n";
-            text += "MAPEAMENTO DE CONTROLES\n\n";
-            [0, 1].forEach(ctrlIdx => {
-                const name = ctrlIdx === 0 ? "Controle 0 (Driver)" : "Controle 1 (Operator)";
-                text += `${name}:\n`;
-                document.querySelectorAll(`.ctrl-input[data-ctrl="${ctrlIdx}"]`).forEach(input => {
-                    text += `  - ${input.dataset.btn}: ${input.value}\n`;
-                });
-                text += "\n";
-            });
-            text += "---------------------------------------------------------------------------------------------------------------------------\n\n";
-
-            for (const [section, devices] of Object.entries(configData)) {
-                text += `${section}:\n\n`;
-                devices.forEach(dev => {
-                    let line = `${dev.id} (Porta ${dev.port}) - ${dev.desc}    Nome Na Programação: (${dev.prog})`;
-                    if (dev.v1 && dev.v1 !== "-") line += `    ${dev.val1}: (${dev.v1})`;
-                    if (dev.v2 && dev.v2 !== "-") line += `    ${dev.val2}: (${dev.v2})`;
-                    text += line + "\n";
-                });
-                text += "\n---------------------------------------------------------------------------------------------------------------------------\n\n";
-            }
-            document.getElementById('outputText').value = text;
-            document.getElementById('app').style.display = 'none';
-            document.getElementById('exportArea').style.display = 'block';
-            document.querySelector('.controllers-container').style.display = 'none';
-        }
-
-        function hideExport() {
-            document.getElementById('app').style.display = 'block';
-            document.getElementById('exportArea').style.display = 'none';
-            document.querySelector('.controllers-container').style.display = 'block';
-        }
-
-        loadControllerData();
-        render();
-        document.querySelectorAll('.ctrl-input').forEach(input => {
-            input.addEventListener('change', saveToLocalStorage);
-        });
-    </script>
+    <script type="module" src="app.js"></script>
 </body>
 </html>

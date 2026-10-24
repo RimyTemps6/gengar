@@ -1,0 +1,334 @@
+        :root {
+            /* Paleta BrainMachine #17728 - Branco, Roxo e Preto */
+            --primary: #8A2BE2; /* Roxo */
+            --primary-dark: #4B0082;
+            --secondary: #000000; /* Preto */
+            --bg: #FFFFFF; /* Fundo Branco */
+            --card-bg: #F5F5F5; /* Branco acinzentado para cards */
+            --text: #1A1A1A; /* Texto quase preto */
+            --text-dim: #666666;
+            --border: #CCCCCC;
+            --accent: #FFFFFF;
+            --highlight: #8A2BE2;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        h1 {
+            color: var(--primary);
+            margin-bottom: 25px;
+            text-align: center;
+            text-transform: uppercase;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+            border-bottom: 3px solid var(--secondary);
+            padding-bottom: 10px;
+            width: 100%;
+            max-width: 1100px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1100px;
+        }
+
+        /* Seções */
+        .section {
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 25px;
+            padding: 15px;
+            border: 1px solid var(--border);
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--primary);
+            color: var(--primary);
+            display: block;
+        }
+
+        /* Grid Adaptável para Celular */
+        .device-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 15px;
+        }
+
+        .device-card {
+            background: var(--accent);
+            border-radius: 10px;
+            padding: 15px;
+            border: 1px solid var(--border);
+            transition: border-color 0.2s;
+        }
+
+        .device-card:hover {
+            border-color: var(--primary);
+        }
+
+        .device-header {
+            font-weight: bold;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1rem;
+        }
+
+        .port-badge {
+            background: var(--primary);
+            color: white;
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            white-space: nowrap;
+        }
+
+        .input-group {
+            margin-bottom: 12px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-group label {
+            font-size: 0.8rem;
+            margin-bottom: 5px;
+            color: var(--text-dim);
+        }
+
+        .input-group input {
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.95rem;
+            width: 100%;
+            box-sizing: border-box;
+            background: #FFFFFF;
+            color: #000;
+            -webkit-appearance: none;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: #FFFFFF;
+        }
+
+        .value-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        /* Controles Responsivos */
+        .controllers-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .controller-card {
+            background: var(--secondary);
+            color: white;
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            border-top: 4px solid var(--primary);
+        }
+
+        .controller-card h2 {
+            text-align: center;
+            margin-top: 0;
+            color: #ccc;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 10px;
+        }
+
+        .button-row {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .ctrl-input-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(138, 43, 226, 0.2);
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid rgba(138, 43, 226, 0.3);
+        }
+
+        .ctrl-label {
+            font-weight: bold;
+            min-width: 30px;
+            color: #E0B0FF;
+            font-size: 0.85rem;
+        }
+
+        .ctrl-input {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid #666;
+            color: white;
+            width: 100%;
+            padding: 4px;
+            font-size: 0.85rem;
+            -webkit-appearance: none;
+        }
+
+        .ctrl-input:focus {
+            outline: none;
+            border-bottom-color: var(--primary);
+        }
+
+        .footer {
+            margin: 30px 0;
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 0.8rem;
+        }
+
+        .save-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(138, 43, 226, 0.4);
+            z-index: 100;
+            text-transform: uppercase;
+            transition: transform 0.2s;
+        }
+
+        .save-btn:active {
+            transform: scale(0.95);
+        }
+
+        .export-area {
+            display: none;
+            width: 100%;
+            max-width: 800px;
+            margin-top: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 300px;
+            font-family: monospace;
+            padding: 15px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            background: #f9f9f9;
+            color: #000;
+            font-size: 0.9rem;
+            box-sizing: border-box;
+        }
+
+        /* Ajustes Mobile */
+        @media (max-width: 600px) {
+            body { padding: 10px; }
+            h1 { font-size: 1.2rem; }
+            .value-row { grid-template-columns: 1fr; }
+            .controllers-container { grid-template-columns: 1fr; }
+            .button-grid { grid-template-columns: 1fr; }
+            .save-btn {
+                width: calc(100% - 40px);
+                left: 20px;
+                right: 20px;
+                text-align: center;
+                bottom: 15px;
+            }
+        }
+
+/* ===== Novos recursos: edição, sync, PWA ===== */
+body { padding-bottom: 110px; }
+
+.topbar {
+    display: flex; gap: 8px; align-items: center; justify-content: center;
+    flex-wrap: wrap; width: 100%; max-width: 1100px; margin: -10px 0 20px;
+}
+.pill {
+    font-size: 0.8rem; padding: 6px 12px; border-radius: 20px;
+    background: var(--card-bg); border: 1px solid var(--border); color: var(--text-dim);
+}
+.pill.ok { color: #1b7a3a; border-color: #1b7a3a; }
+.pill.saving { color: var(--primary); border-color: var(--primary); }
+.pill.off { color: #b45309; border-color: #b45309; }
+.btn-small {
+    font-size: 0.8rem; padding: 6px 14px; border-radius: 20px; cursor: pointer;
+    background: var(--secondary); color: #fff; border: none;
+}
+.btn-small[hidden] { display: none; }
+
+.device-header { gap: 8px; }
+.device-header .name-input {
+    flex: 1; min-width: 0; font-weight: bold; font-size: 1rem;
+    border: none; border-bottom: 1px dashed var(--border); background: transparent;
+    padding: 4px 2px; color: var(--text);
+}
+.device-header .name-input:focus { outline: none; border-bottom-color: var(--primary); }
+.port-edit {
+    display: flex; align-items: center; gap: 4px; background: var(--primary); color: #fff;
+    font-size: 0.7rem; padding: 3px 8px; border-radius: 10px; white-space: nowrap;
+}
+.port-edit input {
+    width: 54px; border: none; border-radius: 6px; padding: 2px 4px; font-size: 0.8rem;
+    background: rgba(255,255,255,0.95); color: #000; text-align: center;
+}
+.del-btn {
+    border: none; background: transparent; cursor: pointer; font-size: 1.1rem; padding: 2px 4px;
+}
+.label-input {
+    font-size: 0.8rem; margin-bottom: 5px; color: var(--text-dim);
+    border: none; border-bottom: 1px dashed var(--border); background: transparent; padding: 2px 0;
+    width: 100%; box-sizing: border-box;
+}
+.label-input:focus { outline: none; border-bottom-color: var(--primary); }
+
+.section-actions { margin-top: 15px; display: flex; gap: 8px; }
+.add-btn {
+    background: var(--accent); color: var(--primary); border: 2px dashed var(--primary);
+    border-radius: 10px; padding: 10px 16px; cursor: pointer; font-weight: bold; font-size: 0.9rem;
+}
+.add-section-btn {
+    width: 100%; max-width: 1100px; margin-bottom: 25px; padding: 14px;
+    background: var(--secondary); color: #fff; border: none; border-radius: 12px;
+    font-weight: bold; cursor: pointer;
+}
+.export-actions { display: flex; gap: 10px; margin-top: 10px; }
+.export-actions button {
+    flex: 1; padding: 12px 20px; cursor: pointer; border-radius: 6px; border: 1px solid var(--border);
+    background: var(--secondary); color: #fff;
+}
+.export-actions button.primary { background: var(--primary); border-color: var(--primary); }
